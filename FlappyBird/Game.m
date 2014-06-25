@@ -14,6 +14,45 @@
 
 @implementation Game
 
+-(IBAction)StartGame:(id)sender
+{
+    
+    StartGame.hidden = YES;
+    BirdMovement = [NSTimer scheduledTimerWithTimeInterval:0.05 target:self selector : @selector(BirdMoving) userInfo:nil repeats:YES];
+    
+}
+
+-(void)BirdMoving
+{
+    
+    Bird.center = CGPointMake(Bird.center.x, Bird.center.y - BirdFlight);
+    
+    BirdFlight = BirdFlight - 5;
+    
+    if (BirdFlight < -15)
+    {
+        BirdFlight = -15;
+    }
+    
+    if (BirdFlight > 0)
+    {
+        
+        Bird.image = [UIImage imageNamed:@"BirdUp.png"];
+        
+    } else Bird.image = [UIImage imageNamed:@"BirdDown.png"];
+        
+    
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    BirdFlight = 30;
+    
+    
+}
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
